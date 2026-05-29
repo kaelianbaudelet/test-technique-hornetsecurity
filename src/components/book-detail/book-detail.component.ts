@@ -1,0 +1,205 @@
+import { CommonModule, Location } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowLeft, lucideBookmarkPlus, lucideLoader2, lucideTrash2 } from '@ng-icons/lucide';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
+import { HlmCardImports } from '@spartan-ng/helm/card';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmSkeleton } from '@spartan-ng/helm/skeleton';
+import { HlmButtonImports } from '@spartan-ng/ui/button';
+import { BookService } from '../../app/services/book.service';
+import { CartService } from '../../app/services/cart.service';
+
+@Component({
+  selector: 'app-book-detail',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgIcon,
+    ...HlmButtonImports,
+    ...HlmBadgeImports,
+    ...HlmCardImports,
+    ...HlmIconImports,
+    HlmSkeleton,
+  ],
+  providers: [
+    provideIcons({
+      lucideArrowLeft,
+      lucideBookmarkPlus,
+      lucideTrash2,
+      lucideLoader2,
+    }),
+  ],
+  template: `
+    <div
+      class="container mx-auto p-4 md:p-8"
+      [attr.aria-busy]="loading() ? 'true' : null"
+    >
+
+      <button
+        hlmBtn
+        variant="ghost"
+        (click)="goBack()"
+        class="mb-6 pl-0 text-muted-foreground hover:bg-transparent hover:text-foreground transition-colors"
+        i18n="Navigation|Button to return to library page@@book.backToLibrary"
+      >
+        <ng-icon hlm name="lucideArrowLeft" size="sm" class="mr-2" aria-hidden="true" />
+        Back to Library
+      </button>
+
+      @if (loading()) {
+      <hlm-skeleton class="h-[500px] md:h-[740px] rounded-xl w-full" aria-hidden="true" />
+      }
+
+      @if (!loading() && book()) {
+      <section hlmCard class="overflow-hidden flex flex-col md:flex-row py-0 gap-0">
+
+        <div class="md:w-1/3 h-72 md:h-auto bg-muted flex-shrink-0 relative">
+          <img
+            [src]="book()?.image"
+            (error)="handleImageError($event)"
+            i18n-title="Image|Title for book cover image@@book.coverTitle"
+            title="Book cover"
+            alt="Book cover of {{ book()?.title }} by {{ book()?.author }}"
+            i18n-alt="Image|Alt text for book cover image@@book.coverAlt"
+            loading="lazy"
+            class="w-full h-full object-cover object-top"
+          />
+        </div>
+
+        <div class="p-5 md:p-8 md:w-2/3 flex flex-col">
+          <hlm-card-header class="px-0 pt-0 md:pt-2">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-3 sm:gap-0">
+              <div>
+                <h1 hlmCardTitle class="text-2xl sm:text-3xl mb-1">
+                  {{ book()?.title }}
+                </h1>
+                <p hlmCardDescription class="text-lg sm:text-xl">
+                  {{ book()?.author }}
+                </p>
+              </div>
+              <span hlmBadge variant="secondary" class="bg-blue-50 text-blue-700 hover:bg-blue-100 border-none self-start sm:self-auto">
+                {{ book()?.genre }}
+              </span>
+            </div>
+          </hlm-card-header>
+
+          <div hlmCardContent class="flex-grow px-0">
+            <div class="grid grid-cols-2 gap-4 py-4 border-y border-border mb-6">
+              <div>
+                <p class="text-sm font-medium text-muted-foreground" i18n="Book Detail|Label for publication date@@book.label.published">Published</p>
+                <p class="text-foreground">{{ book()?.published }}</p>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-muted-foreground" i18n="Book Detail|Label for publisher name@@book.label.publisher">Publisher</p>
+                <p class="text-foreground">{{ book()?.publisher }}</p>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <p class="text-sm font-medium text-muted-foreground" i18n="Book Detail|Label for ISBN@@book.label.isbn">ISBN</p>
+                <p class="text-foreground font-mono text-sm break-all">{{ book()?.isbn }}</p>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-foreground mb-2" i18n="Book Detail|Title for synopsis section@@book.synopsis.title">
+                Synopsis
+              </h3>
+              <p class="text-muted-foreground leading-relaxed text-sm md:text-base">
+                {{ book()?.description }}
+              </p>
+            </div>
+          </div>
+
+          <hlm-card-footer class="mt-auto pt-4 border-t border-border px-0 pb-0">
+            <button
+              hlmBtn
+              [variant]="isInCart() ? 'destructive' : 'default'"
+              (click)="toggleCart()"
+              class="w-full py-6 text-base font-medium transition-all flex justify-center items-center"
+            >
+              <ng-icon
+                hlm
+                [name]="isInCart() ? 'lucideTrash2' : 'lucideBookmarkPlus'"
+                size="sm"
+                class="mr-2"
+                aria-hidden="true"
+              />
+              @if (isInCart()) {
+                <span i18n="Action|Button text to remove from reservations@@book.btn.remove">Remove from Reservations</span>
+              } @else {
+                <span i18n="Action|Button text to reserve book@@book.btn.reserve">Reserve this Book</span>
+              }
+            </button>
+          </hlm-card-footer>
+        </div>
+      </section>
+      }
+
+      @if (!loading() && !book()) {
+      <section hlmCard class="text-center py-12 border-border" role="alert" aria-live="polite">
+        <div hlmCardContent class="flex flex-col items-center justify-center">
+          <h2 hlmCardTitle class="text-xl text-muted-foreground mb-4" i18n="Error|Message when book not found@@book.notFound">Book not found</h2>
+          <button
+            hlmBtn
+            (click)="goBack()"
+            i18n="Action|Button to return to library when book not found@@book.notFound.back"
+          >
+            Return to Library
+          </button>
+        </div>
+      </section>
+      }
+    </div>
+  `,
+})
+export class BookDetailComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private bookService = inject(BookService);
+  private cartService = inject(CartService);
+  private location = inject(Location);
+
+  private bookId = Number(this.route.snapshot.paramMap.get('id'));
+
+  books = toSignal(this.bookService.books$, { initialValue: [] });
+  loading = toSignal(this.bookService.loading$, { initialValue: true });
+
+  book = computed(() => this.books().find((b) => b.id === this.bookId));
+
+  isInCart = computed(() => {
+    const currentBook = this.book();
+    return currentBook ? this.cartService.isInCart(currentBook.id) : false;
+  });
+
+  ngOnInit() {
+    if (this.books().length === 0) {
+      this.bookService.getBooks(40).subscribe();
+    }
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  toggleCart() {
+    const currentBook = this.book();
+    if (!currentBook) return;
+
+    if (this.isInCart()) {
+      this.cartService.removeFromCart(currentBook.id);
+    } else {
+      this.cartService.addToCart(currentBook);
+    }
+  }
+
+  handleImageError(event: Event) {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+
+    // Note: fakerapi.it generates dead image links (placeimg.com no longer exists).
+    // Any invalid image URL is automatically replaced by a default placehold.co image.
+    target.src = 'https://placehold.co/400x600/e2e8f0/475569';
+  }
+}
