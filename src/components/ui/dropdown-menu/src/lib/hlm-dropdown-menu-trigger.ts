@@ -1,0 +1,62 @@
+import { CdkMenuTrigger } from '@angular/cdk/menu';
+import type { ConnectedPosition } from '@angular/cdk/overlay';
+import { computed, Directive, effect, inject, input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { createMenuPosition, type MenuAlign, type MenuSide } from '@spartan-ng/brain/core';
+import { injectHlmDropdownMenuConfig } from './hlm-dropdown-menu-token';
+
+@Directive({
+  selector: '[hlmDropdownMenuTrigger]',
+  hostDirectives: [
+    {
+      directive: CdkMenuTrigger,
+      inputs: [
+        'cdkMenuTriggerFor: hlmDropdownMenuTrigger',
+        'cdkMenuTriggerData: hlmDropdownMenuTriggerData',
+      ],
+      outputs: ['cdkMenuOpened: hlmDropdownMenuOpened', 'cdkMenuClosed: hlmDropdownMenuClosed'],
+    },
+  ],
+  host: {
+    'data-slot': 'dropdown-menu-trigger',
+  },
+})
+export class HlmDropdownMenuTrigger {
+  private readonly _cdkTrigger = inject(CdkMenuTrigger, { host: true });
+  private readonly _config = injectHlmDropdownMenuConfig();
+
+  public readonly align = input<MenuAlign>(this._config.align);
+  public readonly side = input<MenuSide>(this._config.side);
+
+  private readonly _menuPosition = computed(() => createMenuPosition(this.align(), this.side()));
+
+  constructor() {
+    // once the trigger opens we wait until the next tick and then grab the last position
+    // used to position the menu. we store this in our trigger which the brnMenu directive has
+    // access to through DI
+    this._cdkTrigger.opened.pipe(takeUntilDestroyed()).subscribe(() =>
+      setTimeout(() => {
+        type SpartanLastPositionCarrier = {
+          _spartanLastPosition?: ConnectedPosition;
+        };
+
+        type TriggerWithOverlayRef = {
+          overlayRef?: {
+            _positionStrategy?: {
+              _lastPosition?: ConnectedPosition;
+            };
+          };
+        };
+
+        const trigger = this._cdkTrigger as unknown as TriggerWithOverlayRef &
+          SpartanLastPositionCarrier;
+
+        trigger._spartanLastPosition = trigger.overlayRef?._positionStrategy?._lastPosition;
+      }),
+    );
+
+    effect(() => {
+      this._cdkTrigger.menuPosition = this._menuPosition();
+    });
+  }
+}
