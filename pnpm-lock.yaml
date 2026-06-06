@@ -39,8 +39,8 @@ importers:
         specifier: '>=32.0.0 <34.0.0'
         version: 33.2.3
       '@spartan-ng/brain':
-        specifier: 0.0.1-alpha.700
-        version: 0.0.1-alpha.700(63aad4e04d6d06299e06e9e0deea0ff3)
+        specifier: 0.0.1-alpha.706
+        version: 0.0.1-alpha.706(63aad4e04d6d06299e06e9e0deea0ff3)
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0)(less@4.5.1)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))
@@ -1303,8 +1303,8 @@ packages:
     resolution: {integrity: sha512-vqTaUEgxzm+YDSdElad6PiRoX4t8VGDjCtt05zn4nU810UIx/uNEV7/lZJ6KwFThKZOzOxzXy48da+No7HZaMw==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@eslint/plugin-kit@0.7.1':
-    resolution: {integrity: sha512-rZAP3aVgB9ds9KOeUSL+zZ21hPmo8dh6fnIFwRQj5EAZl9gzR7wxYbYXYysAM8CTqGmUGyp2S4kUdV17MnGuWQ==}
+  '@eslint/plugin-kit@0.7.2':
+    resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@exodus/bytes@1.15.1':
@@ -2668,8 +2668,8 @@ packages:
   '@sinclair/typebox@0.34.49':
     resolution: {integrity: sha512-brySQQs7Jtn0joV8Xh9ZV/hZb9Ozb0pmazDIASBkYKCjXrXU3mpcFahmK/z4YDhGkQvP9mWJbVyahdtU5wQA+A==}
 
-  '@spartan-ng/brain@0.0.1-alpha.700':
-    resolution: {integrity: sha512-t5t8EuhjcWfBHn4EQAWW1Zr64U4UAbGB6ERHto0SebrpEt/jN9/YiIlDyZDvu/uITA1AAMiDQDGcqwZjc0dgLw==}
+  '@spartan-ng/brain@0.0.1-alpha.706':
+    resolution: {integrity: sha512-PqqpF9lZ/bCK1AfQ1czHmNkDdYWCGtDQEEoXlqMRZ1LIzEk8ptQglDuBwU+74ynjUgEUxfwJbcZHC3eN14KOaQ==}
     peerDependencies:
       '@angular/cdk': '>=20.0.0 <22.0.0'
       '@angular/common': '>=20.0.0 <22.0.0'
@@ -8372,7 +8372,7 @@ snapshots:
 
   '@eslint/object-schema@3.0.5': {}
 
-  '@eslint/plugin-kit@0.7.1':
+  '@eslint/plugin-kit@0.7.2':
     dependencies:
       '@eslint/core': 1.2.1
       levn: 0.4.1
@@ -10080,7 +10080,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.49': {}
 
-  '@spartan-ng/brain@0.0.1-alpha.700(63aad4e04d6d06299e06e9e0deea0ff3)':
+  '@spartan-ng/brain@0.0.1-alpha.706(63aad4e04d6d06299e06e9e0deea0ff3)':
     dependencies:
       '@angular/cdk': 21.2.13(@angular/common@21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/platform-browser@21.2.15(@angular/common@21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)(zone.js@0.16.2)))(rxjs@7.8.2)
       '@angular/common': 21.2.15(@angular/core@21.2.15(@angular/compiler@21.2.15)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2)
@@ -11581,7 +11581,7 @@ snapshots:
       '@eslint/config-array': 0.23.5
       '@eslint/config-helpers': 0.6.0
       '@eslint/core': 1.2.1
-      '@eslint/plugin-kit': 0.7.1
+      '@eslint/plugin-kit': 0.7.2
       '@humanfs/node': 0.16.8
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
