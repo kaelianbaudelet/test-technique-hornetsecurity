@@ -10,6 +10,7 @@
     "test": "ng test",
     "test:e2e": "playwright test",
     "lint": "biome check src/",
+    "lint:fix": "biome check --write src/",
     "format": "biome format --write src/",
     "prepare": "lefthook install"
   },

@@ -1,68 +1,64 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>La Petite Librairie</title>
-    <base href="/" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta
       name="description"
       content="Découvrez La Petite Librairie : un large choix de romans, mangas, bandes dessinées et livres scolaires. Commandez en ligne facilement."
-    />
-    <meta name="robots" content="index, follow" />
+    >
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph (Facebook, LinkedIn, Discord, etc.) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="La Petite Librairie" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="La Petite Librairie">
     <meta
       property="og:description"
       content="Explorez notre catalogue complet et trouvez votre prochaine lecture sur La Petite Librairie."
-    />
-    <meta property="og:image" content="/banner.png" />
-    <meta property="og:site_name" content="La Petite Librairie" />
+    >
+    <meta property="og:image" content="/banner.png">
+    <meta property="og:site_name" content="La Petite Librairie">
 
     <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="La Petite Librairie" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="La Petite Librairie">
     <meta
       name="twitter:description"
       content="Explorez notre catalogue complet et trouvez votre prochaine lecture sur La Petite Librairie."
-    />
-    <meta name="twitter:image" content="/banner.png" />
+    >
+    <meta name="twitter:image" content="/banner.png">
 
     <!-- Performance & Expérience Utilisateur -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#8FBF55" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#8FBF55">
   </head>
   <body>
     <!-- Accessibilité -->
     <noscript>
-      JavaScript est désactivé sur votre navigateur. Veuillez l'activer pour
-      profiter pleinement de La Petite Librairie.
+      JavaScript est désactivé sur votre navigateur. Veuillez l'activer pour profiter pleinement de
+      La Petite Librairie.
     </noscript>
 
     <app-root></app-root>
   </body>
   <script>
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        if (document?.documentElement) {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        }
-      } else {
-        if (document?.documentElement) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        }
-      }
-    </script>
+  if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    if (document?.documentElement) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  } else {
+    if (document?.documentElement) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  </script>
 </html>
