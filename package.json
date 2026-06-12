@@ -48,7 +48,7 @@
     "@playwright/test": "^1.60.0",
     "@spartan-ng/cli": "0.0.1-alpha.711",
     "@tailwindcss/postcss": "^4.3.0",
-    "@types/node": "^25.9.1",
+    "@types/node": "^25.9.3",
     "jsdom": "^29.1.1",
     "lefthook": "^2.1.9",
     "puppeteer": "^25.1.0",
