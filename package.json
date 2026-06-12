@@ -30,7 +30,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "embla-carousel-angular": "^20.0.0",
+    "embla-carousel-angular": "^21.0.0",
     "rxjs": "~7.8.2",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0",
