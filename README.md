@@ -98,28 +98,37 @@ src
 │       ├── book.service.ts
 │       ├── cart.service.spec.ts
 │       ├── cart.service.ts
+│       ├── error.service.ts
 │       ├── global-error-handler.service.ts
 │       └── theme.service.ts
 ├── components
 │   ├── basket
+│   │   ├── basket.component.html
 │   │   ├── basket.component.spec.ts
 │   │   └── basket.component.ts
 │   ├── book-detail
+│   │   ├── book-detail.component.html
 │   │   ├── book-detail.component.spec.ts
 │   │   └── book-detail.component.ts
 │   ├── book-list
+│   │   ├── book-list.component.html
 │   │   ├── book-list.component.spec.ts
 │   │   └── book-list.component.ts
 │   ├── contact
+│   │   ├── contact.component.html
 │   │   ├── contact.component.spec.ts
 │   │   └── contact.component.ts
 │   ├── error-overlay
+│   │   ├── error-overlay.component.html
 │   │   └── error-overlay.component.ts
 │   ├── landing
+│   │   ├── landing.component.html
 │   │   └── landing.component.ts
 │   ├── navbar
+│   │   ├── navbar.component.html
 │   │   └── navbar.component.ts
 │   ├── not-found
+│   │   ├── not-found.component.html
 │   │   └── not-found.component.ts
 │   └── ui
 │       └── ... (SpartanNG reusable UI primitives)
