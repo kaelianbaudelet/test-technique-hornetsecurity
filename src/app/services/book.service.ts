@@ -17,7 +17,7 @@ export class BookService {
    * Since fakerapi.it does not support this type of pagination here,
    * we are fetching a batch of 80 items all at once as a workaround.
    */
-  private apiUrl = 'https://fakerapi.it/api/v2/books?_seed=12456&_quantity=80';
+  private apiUrl = 'https://fakerapi.it/api/v2/books?_seed=12456';
 
   private booksSubject = new BehaviorSubject<Book[]>([]);
   books$ = this.booksSubject.asObservable();
