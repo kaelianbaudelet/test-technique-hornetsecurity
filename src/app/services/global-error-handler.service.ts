@@ -1,16 +1,17 @@
 import { ErrorHandler, Injectable, inject, NgZone } from '@angular/core';
-import { AppComponent } from '../app';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalErrorHandler implements ErrorHandler {
-  private ngZone = inject(NgZone);
+  private readonly ngZone = inject(NgZone);
+  private readonly errorService = inject(ErrorService);
 
   handleError(error: Error): void {
-    console.error('Erreur critique capturée par le GlobalErrorHandler:', error);
+    console.error('Critical error caught by GlobalErrorHandler:', error);
     this.ngZone.run(() => {
-      AppComponent.hasError.set(true);
+      this.errorService.setError(true);
     });
   }
 }

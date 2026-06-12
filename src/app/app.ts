@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router'; // RouterOutlet vient de @angular/router
+import { Component, inject } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { ErrorOverlayComponent } from '../components/error-overlay/error-overlay.component';
+import { ErrorService } from './services/error.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterModule, ErrorOverlayComponent],
   template: `
-    @if (hasError()) {
+    @if (errorService.hasError()) {
       <app-error-overlay />
     } @else {
       <router-outlet />
@@ -15,9 +16,5 @@ import { ErrorOverlayComponent } from '../components/error-overlay/error-overlay
   `,
 })
 export class AppComponent {
-  // On garde le signal statique pour que ton service puisse y accéder
-  public static hasError = signal(false);
-
-  // On expose le signal pour le template du composant
-  public hasError = AppComponent.hasError;
+  protected readonly errorService = inject(ErrorService);
 }
