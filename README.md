@@ -2,8 +2,6 @@
   <br><br>
   <img src=".github/assets/logo.png" alt="La Petite Librairie Logo" width="450" />
   <br><br>
-  <a href="https://lapetitelibrairie.kaelian.dev">lapetitelibrairie.kaelian.dev</a>
-  <br><br>
   <sub>Library Catalog and Reservation Front-End Application</sub>
   <br><br>
   <img src=".github/assets/angular.png" alt="Angular" width="28" /> &nbsp;&nbsp;
